@@ -1,0 +1,10 @@
+{
+  "appId": "com.satyambnsal.ascendit",
+  "appName": "Ascendit",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000
+    }
+  }
+}
