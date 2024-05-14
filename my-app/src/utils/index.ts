@@ -34,6 +34,7 @@ export const ERROR_MESSAGES = {
   DOJO_PROVIDER_INIT_FAILED: 'Failed to initialise dojo provider',
   BURNER_INIT_FAILED: 'Failed to initialise burner',
 }
+export const ACTIONS_CONTRACT = '0x1473b7da9f3f265893ecb4fe9f2c1dcaaa95750d53cf399d73c6f33ec51b7dc'
 
 export const stringToHexString = (str: string) => {
   return str

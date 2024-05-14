@@ -1,13 +1,12 @@
-import { DojoProvider } from '@dojoengine/core'
 import { atom } from 'jotai'
-import { Account, SignerInterface } from 'starknet'
+import { Account, RpcProvider, SignerInterface } from 'starknet'
 
-export const dojoProviderAtom = atom<DojoProvider | null>(null)
+export const dojoProviderAtom = atom<RpcProvider | null>(null)
 export const accountDataAtom = atom<{ address: string; signer: SignerInterface } | null>(null)
 
 export const accountAtom = atom<Account | null>((get) => {
   const accountData = get(accountDataAtom)
   const dojoProvider = get(dojoProviderAtom)
   if (!dojoProvider || !accountData?.address) return null
-  return new Account(dojoProvider?.provider, accountData?.address, accountData?.signer, '1')
+  return new Account(dojoProvider, accountData?.address, (accountData?.signer as any)?.pk, '1')
 })

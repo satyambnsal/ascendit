@@ -47,7 +47,7 @@ export const useAccounts = () => {
       setError({ isError: true, message: ERROR_MESSAGES.DOJO_PROVIDER_INIT_FAILED })
       return
     }
-    console.log('provider', dojoProvider?.provider)
+    console.log('provider', dojoProvider)
     setIsLoading(true)
     const newBurnerManager = new BurnerManager({
       masterAccount: new Account(
@@ -58,7 +58,7 @@ export const useAccounts = () => {
         config.masterPrivateKey
       ),
       accountClassHash: config.accountClassHash,
-      rpcProvider: dojoProvider?.provider!,
+      rpcProvider: dojoProvider!,
       feeTokenAddress: config.feeTokenAddress,
     })
     await newBurnerManager.init()
@@ -68,8 +68,8 @@ export const useAccounts = () => {
   }
 
   const masterAccount = useMemo(
-    () => new Account(dojoProvider?.provider!, config.masterAddress, config.masterPrivateKey, '1'),
-    [config.masterAddress, config.masterPrivateKey, dojoProvider?.provider]
+    () => new Account(dojoProvider!, config.masterAddress, config.masterPrivateKey, '1'),
+    [config.masterAddress, config.masterPrivateKey, dojoProvider]
   )
 
   const getAccount = async (): Promise<Account | null> => {
@@ -79,7 +79,7 @@ export const useAccounts = () => {
       let accountFromStorage: { address: string; signer: SignerInterface } =
         JSON.parse(accountFromStorageStr)
       let account = new Account(
-        dojoProvider?.provider!,
+        dojoProvider!,
         accountFromStorage.address,
         accountFromStorage.signer,
         '1'

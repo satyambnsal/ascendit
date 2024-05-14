@@ -24,7 +24,7 @@ export const AccountScreen = () => {
         {!!account && (
           <div>
             <p>Use Existing Account 1</p>
-            <IonButton routerLink="/home">{trimStringWithEllipsis(account?.address)}</IonButton>
+            <IonButton routerLink="/game">{trimStringWithEllipsis(account?.address)}</IonButton>
           </div>
         )}
         <IonButton onClick={createAccount}>

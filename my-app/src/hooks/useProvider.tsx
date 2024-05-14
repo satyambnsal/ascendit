@@ -4,6 +4,7 @@ import { dojoConfig } from '../../dojoConfig'
 import { useEffect, useState } from 'react'
 import { ERROR_MESSAGES } from '../utils'
 import { dojoProviderAtom } from '../state/atoms'
+import { RpcProvider } from 'starknet'
 
 export const useProvider = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -15,11 +16,12 @@ export const useProvider = () => {
     }
   )
   const [dojoProvider, setDojoProvider] = useAtom(dojoProviderAtom)
+  
   useEffect(() => {
     setIsLoading(true)
     if (!dojoProvider) {
       try {
-        const provider = new DojoProvider(dojoConfig.manifest, dojoConfig.rpcUrl)
+        const provider = new RpcProvider({ nodeUrl: dojoConfig.rpcUrl })
         setDojoProvider(provider)
         setIsLoading(false)
         setError({ isError: false })
