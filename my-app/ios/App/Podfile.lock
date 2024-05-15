@@ -1,13 +1,9 @@
 PODS:
   - Capacitor (6.0.0):
     - CapacitorCordova
-  - CapacitorCamera (6.0.0):
-    - Capacitor
   - CapacitorCommunityImageToText (6.0.1):
     - Capacitor
   - CapacitorCordova (6.0.0)
-  - CapacitorHealthkitDojo (0.0.4):
-    - Capacitor
   - CapacitorPreferences (6.0.0):
     - Capacitor
   - CapacitorSplashScreen (6.0.0):
@@ -15,24 +11,18 @@ PODS:
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
-  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCommunityImageToText (from `../../node_modules/@capacitor-community/image-to-text`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
-  - CapacitorHealthkitDojo (from `../../node_modules/capacitor-healthkit-dojo`)
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
-  CapacitorCamera:
-    :path: "../../node_modules/@capacitor/camera"
   CapacitorCommunityImageToText:
     :path: "../../node_modules/@capacitor-community/image-to-text"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
-  CapacitorHealthkitDojo:
-    :path: "../../node_modules/capacitor-healthkit-dojo"
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
   CapacitorSplashScreen:
@@ -40,13 +30,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Capacitor: 559d073c4ca6c27f8e7002c807eea94c3ba435a9
-  CapacitorCamera: b61f125d92a0ef75d7becb7956fed7dd13187ee0
   CapacitorCommunityImageToText: 8cd893c6ffb35ba7809cc3be277a8cf811d08ff3
   CapacitorCordova: 8c4bfdf69368512e85b1d8b724dd7546abeb30af
-  CapacitorHealthkitDojo: 4a1d648fc8c067c648eb9762c5125a2f184f8470
   CapacitorPreferences: c9b839a80baa72e4ed4bdb117618e1950d3046b5
   CapacitorSplashScreen: 5431ab8d19c1c6e95777d53bfaa7a36a6c3d94c7
 
-PODFILE CHECKSUM: 396a407952d8cbce8cfac26ac5089934eebc701b
+PODFILE CHECKSUM: 38459532d0b9abb2b12204c9acd39090889301b9
 
 COCOAPODS: 1.15.2

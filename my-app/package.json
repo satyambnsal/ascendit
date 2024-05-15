@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@capacitor-community/image-to-text": "^6.0.1",
-    "@capacitor/camera": "latest",
     "@capacitor/core": "latest",
     "@capacitor/ios": "^6.0.0",
     "@capacitor/preferences": "^6.0.0",
@@ -42,7 +41,6 @@
     "@ionic/react-router": "latest",
     "@latticexyz/react": "^2.0.0-next.11",
     "@latticexyz/utils": "^2.0.0-next.11",
-    "capacitor-healthkit-dojo": "0.0.4",
     "clsx": "^2.1.1",
     "ethers": "^5.7.2",
     "gql.tada": "^1.7.1",
