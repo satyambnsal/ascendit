@@ -5,10 +5,12 @@ import { NewGameBtn } from '../NewGameBtn'
 import { useEffect, useState } from 'react'
 import { formatAddress } from '../../utils'
 import { useAccounts } from '../../hooks/useAccounts'
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent } from '@ionic/react'
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonIcon } from '@ionic/react'
 import {
   BlockTitle,
   Card,
+  Icon,
+  Link,
   Navbar,
   NavbarBackLink,
   Table,
@@ -17,6 +19,7 @@ import {
   TableHead,
   TableRow,
 } from 'konsta/react'
+import { arrowBackOutline } from 'ionicons/icons'
 
 const GamesQuery = graphql(`
   query Games($offset: Int) {
@@ -64,7 +67,18 @@ export const LeaderboardScreen = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <Navbar title="Asecend It" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+          <Link>
+            <IonIcon
+              icon={arrowBackOutline}
+              size="large"
+              onClick={() => {
+                history.goBack()
+              }}
+              className="k-color-brand-green"
+              color="#A91D3A"
+            />{' '}
+            Go Back
+          </Link>
           <NewGameBtn />
         </IonToolbar>
       </IonHeader>

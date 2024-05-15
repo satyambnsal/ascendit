@@ -66,7 +66,7 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
         disabled={!account?.address}
         large
       >
-        {creating && <Spinner className="mr-4" />} New Game
+        {creating && <Spinner className="mr-4" fill="white" />} New Game
       </Button>
     </div>
   )

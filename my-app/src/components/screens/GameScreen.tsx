@@ -1,11 +1,12 @@
-import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react'
+import { IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react'
 import { graphql } from 'gql.tada'
-import { Block, Button, Navbar, NavbarBackLink, Preloader, Toast } from 'konsta/react'
+import { Block, Button, Link, Navbar, NavbarBackLink, Preloader, Toast } from 'konsta/react'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { useAccounts } from '../../hooks/useAccounts'
 import { useQuery, useSubscription } from 'urql'
 import { ACTIONS_CONTRACT, formatAddress } from '../../utils'
+import { arrowBackOutline } from 'ionicons/icons'
 
 const GameQuery = graphql(`
   query GameQuery($gameId: u32) {
@@ -59,10 +60,17 @@ export const GameScreen = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <Navbar
-              title="Game"
-              left={<NavbarBackLink onClick={() => history.push(`/leaderboard`)} />}
-            />
+            <Link>
+              <IonIcon
+                icon={arrowBackOutline}
+                size="large"
+                onClick={() => {
+                  history.goBack()
+                }}
+                className="k-color-brand-green"
+                color="#A91D3A"
+              />
+            </Link>
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -136,18 +144,28 @@ export const GameScreen = () => {
 
   console.log('player', player)
   return (
-    <IonPage className="overflow-hidden">
+    <IonPage>
       <IonHeader>
         <IonToolbar>
-          <Navbar
-            title="Game"
-            left={<NavbarBackLink onClick={() => history.push(`/leaderboard`)} />}
-          />
-          <div className="flex justify-between py-6 px-4">
-            <strong>
-              {formatAddress(player)} {isOwner && '(you)'}
-            </strong>
-            <strong className="">Next Number: {next}</strong>
+          <div>
+            <Link>
+              <IonIcon
+                icon={arrowBackOutline}
+                size="large"
+                onClick={() => {
+                  history.goBack()
+                }}
+                className="k-color-brand-green"
+                color="#A91D3A"
+              />
+              Go Back
+            </Link>
+            <div className="flex justify-between py-6 px-4">
+              <strong>
+                {formatAddress(player)} {isOwner && '(you)'}
+              </strong>
+              <strong className="">Next Number: {next}</strong>
+            </div>
           </div>
         </IonToolbar>
       </IonHeader>
