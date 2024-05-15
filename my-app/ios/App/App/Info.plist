@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitrace</string>
+	<string>AscendIt</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,18 +20,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to your camera to scan wallet keys</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>App need access to health data to show step counts and mint reward points</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>App need access to health data to show step counts and mint reward points</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs access to photo library to scan photos for wallet keys</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to photo library to scan photos for wallet keys</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -50,8 +42,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
-	<key>ITSAppUsesNonExemptEncryption</key>
 	<true/>
 </dict>
 </plist>

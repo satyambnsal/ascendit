@@ -7,6 +7,7 @@ import { formatAddress } from '../../utils'
 import { useAccounts } from '../../hooks/useAccounts'
 import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent } from '@ionic/react'
 import {
+  BlockTitle,
   Card,
   Navbar,
   NavbarBackLink,
@@ -63,11 +64,12 @@ export const LeaderboardScreen = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <Navbar title="Leaderboard" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+          <Navbar title="Asecend It" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+          <NewGameBtn />
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <NewGameBtn />
+        <BlockTitle>Leaderboard</BlockTitle>
         <Card className="block overflow-x-auto mt-8" contentWrap={false} color="black">
           <Table>
             <TableHead>
@@ -86,7 +88,12 @@ export const LeaderboardScreen = () => {
             </TableHead>
             <TableBody>
               {gameResults.map((edge: any, index) => (
-                <TableRow key={edge.node.game_id}>
+                <TableRow
+                  key={edge.node.game_id}
+                  onClick={() => {
+                    history.push(`/game/${edge.node.game_id}`)
+                  }}
+                >
                   <TableCell>{index + offset + 1}</TableCell>
                   <TableCell className="text-left">
                     {formatAddress(edge.node.player)}{' '}

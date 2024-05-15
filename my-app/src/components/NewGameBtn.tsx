@@ -5,6 +5,7 @@ import { useAccounts } from '../hooks/useAccounts'
 import { useHistory } from 'react-router-dom'
 import { ACTIONS_CONTRACT } from '../utils'
 import { Button, Preloader } from 'konsta/react'
+import { Spinner } from './Spinner'
 
 const CreatedEvent = graphql(`
   subscription Created($player: String) {
@@ -41,6 +42,7 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
     if (onNewGame) {
       onNewGame()
     }
+    setCreating(true)
     console.log('=== account ====', account)
 
     const { transaction_hash } = await account.execute({
@@ -50,6 +52,8 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
     })
     console.log(transaction_hash)
   }
+
+  console.log('creating', creating)
 
   return (
     <div className="px-4 my-8">
@@ -62,7 +66,7 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
         disabled={!account?.address}
         large
       >
-        {creating && <Preloader />} New Game
+        {creating && <Spinner className="mr-4" />} New Game
       </Button>
     </div>
   )

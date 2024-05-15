@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react'
 import { graphql } from 'gql.tada'
-import { Block, Button, Navbar, NavbarBackLink, Preloader } from 'konsta/react'
+import { Block, Button, Navbar, NavbarBackLink, Preloader, Toast } from 'konsta/react'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { useAccounts } from '../../hooks/useAccounts'
@@ -51,13 +51,18 @@ export const GameScreen = () => {
   const [disableAll, setDisableAll] = useState(false)
   const [maxNum, setMaxNum] = useState<number>()
   const { account } = useAccounts()
+  const [showErrorToast, setErrorToast] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('false')
 
   if (!gameId) {
     return (
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <Navbar title="Game" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+            <Navbar
+              title="Game"
+              left={<NavbarBackLink onClick={() => history.push(`/leaderboard`)} />}
+            />
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -121,7 +126,9 @@ export const GameScreen = () => {
       console.log('transaction hash', transaction_hash)
     } catch (e) {
       console.error(e)
+      setErrorMessage('can not place number in this slot')
       setDisableAll(false)
+      setErrorToast(true)
       return false
     }
     return true
@@ -129,14 +136,20 @@ export const GameScreen = () => {
 
   console.log('player', player)
   return (
-    <IonPage>
+    <IonPage className="overflow-hidden">
       <IonHeader>
         <IonToolbar>
-          <Navbar title="Game" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+          <Navbar
+            title="Game"
+            left={<NavbarBackLink onClick={() => history.push(`/leaderboard`)} />}
+          />
+          <div className="flex justify-between py-6 px-4">
+            <strong>
+              {formatAddress(player)} {isOwner && '(you)'}
+            </strong>
+            <strong className="">Next Number: {next}</strong>
+          </div>
         </IonToolbar>
-        <p>
-          {formatAddress(player)} {isOwner && '(you)'}
-        </p>
       </IonHeader>
       <IonContent>
         <Block>
@@ -144,9 +157,8 @@ export const GameScreen = () => {
           <p>
             Remaining: <strong>{remaining}</strong>
           </p>
-          <p>Next Number: {next}</p>
         </Block>
-        <div className="flex flex-row justify-around">
+        <div className="flex flex-row justify-around overflow-hidden">
           <div className="flex flex-col gap-2">
             {slots.slice(0, 10).map((number, index) => (
               <Slot
@@ -176,6 +188,17 @@ export const GameScreen = () => {
             ))}
           </div>
         </div>
+        <Toast
+          position="center"
+          opened={showErrorToast}
+          button={
+            <Button rounded clear small inline onClick={() => setErrorToast(false)}>
+              Close
+            </Button>
+          }
+        >
+          <div className="shrink">{errorMessage}</div>
+        </Toast>
       </IonContent>
     </IonPage>
   )

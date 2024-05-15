@@ -7,15 +7,17 @@ import { KonstaProvider } from 'konsta/react'
 export const App = () => {
   return (
     <KonstaProvider theme="ios">
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path="/leaderboard" component={LeaderboardScreen} />
-            <Route path="/game/:gameId" component={GameScreen} />
-            <Route exact path="/" component={AccountScreen} />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
+      <div className="safe-areas">
+        <IonApp>
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route path="/leaderboard" component={LeaderboardScreen} />
+              <Route path="/game/:gameId" component={GameScreen} />
+              <Route exact path="/" component={AccountScreen} />
+            </IonRouterOutlet>
+          </IonReactRouter>
+        </IonApp>
+      </div>
     </KonstaProvider>
   )
 }
