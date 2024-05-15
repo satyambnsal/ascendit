@@ -9,4 +9,10 @@ module.exports = konstaConfig({
     extend: {},
   },
   plugins: [],
+  konsta: {
+    colors: {
+      primary: '#A91D3A',
+      'brand-green': '#00ff00'
+    }
+  }
 })

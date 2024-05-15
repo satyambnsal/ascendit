@@ -1,25 +1,21 @@
-import {
-  VStack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Spacer,
-  HStack,
-  Button,
-  useColorMode,
-} from '@chakra-ui/react'
 import { graphql } from '../../graphql'
 import { useQuery } from 'urql'
 import { useHistory } from 'react-router-dom'
-import { Header } from '../Header'
-import { useState } from 'react'
-import { useBurner } from '@dojoengine/create-burner'
+import { NewGameBtn } from '../NewGameBtn'
+import { useEffect, useState } from 'react'
 import { formatAddress } from '../../utils'
 import { useAccounts } from '../../hooks/useAccounts'
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent } from '@ionic/react'
+import {
+  Card,
+  Navbar,
+  NavbarBackLink,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from 'konsta/react'
 
 const GamesQuery = graphql(`
   query Games($offset: Int) {
@@ -35,11 +31,18 @@ const GamesQuery = graphql(`
   }
 `)
 
+type Edge = {
+  node: {
+    remaining_slots: number | null
+    player: unknown
+    game_id: number | null
+  } | null
+} | null
+
 export const LeaderboardScreen = () => {
   const history = useHistory()
   const [offset, setOffset] = useState<number>(0)
   const { account } = useAccounts()
-  const { colorMode } = useColorMode()
   const [result, reexecuteQuery] = useQuery({
     query: GamesQuery,
     variables: {
@@ -47,74 +50,56 @@ export const LeaderboardScreen = () => {
     },
   })
 
+  const [gameResults, setGameResults] = useState<Edge[]>([])
   const totalResult = result.data?.gameModels?.edges ? result.data.gameModels?.edges.length : 0
+  useEffect(() => {
+    if (result.data?.gameModels?.edges?.length) {
+      setGameResults(result.data?.gameModels?.edges as Edge[])
+    }
+  }, [result.data?.gameModels?.edges, totalResult])
+
+  console.log('total results', totalResult)
   return (
-    <>
-      <Header title={'NUMBER CHALLENGE LEADERBOARD'} />
-      <Spacer minH="40px" />
-      <VStack w="100%" px="40px" gap="40px">
-        <TableContainer w="100%">
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Ranking</Th>
-                <Th>Player</Th>
-                <Th>Remaining Numbers</Th>
-                <Th display={['none', 'none', 'block']}>Game ID</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {result.data?.gameModels?.edges?.map((edge: any, index) => (
-                <Tr
-                  key={edge.node.game_id}
-                  cursor="pointer"
-                  _hover={{
-                    bgColor: colorMode === 'light' ? 'gray.100' : 'gray.700',
-                  }}
-                  onClick={() => {
-                    history.push(`/0x${edge.node.game_id.toString(16)}`)
-                  }}
-                  bgColor={
-                    account?.address === edge.node.player
-                      ? colorMode === 'light'
-                        ? 'green.100'
-                        : 'green.400'
-                      : ''
-                  }
-                >
-                  <Td>{index + offset + 1}</Td>
-                  <Td>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <Navbar title="Leaderboard" left={<NavbarBackLink onClick={() => history.goBack()} />} />
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <NewGameBtn />
+        <Card className="block overflow-x-auto mt-8" contentWrap={false} color="black">
+          <Table>
+            <TableHead>
+              <TableRow header>
+                <TableCell header>Ranking</TableCell>
+                <TableCell header className="text-left">
+                  Player
+                </TableCell>
+                <TableCell header className="text-left">
+                  Remaining Numbers
+                </TableCell>
+                <TableCell header className="text-left">
+                  Game ID
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {gameResults.map((edge: any, index) => (
+                <TableRow key={edge.node.game_id}>
+                  <TableCell>{index + offset + 1}</TableCell>
+                  <TableCell className="text-left">
                     {formatAddress(edge.node.player)}{' '}
-                    {account?.address === edge.node.player && <>(you)</>}
-                  </Td>
-                  <Td>{edge.node.remaining_slots}</Td>
-                  <Td>0x{edge.node.game_id.toString(16)}</Td>
-                </Tr>
+                    {account?.address === edge.node.player && <>(you)</>}{' '}
+                  </TableCell>
+                  <TableCell className="text-center">{edge.node.remaining_slots}</TableCell>
+                  <TableCell className="text-center">{edge.node.game_id.toString(16)}</TableCell>
+                </TableRow>
               ))}
-            </Tbody>
+            </TableBody>
           </Table>
-        </TableContainer>
-        <HStack w="100%" justify="space-between">
-          <Button
-            isDisabled={offset === 0}
-            onClick={() => {
-              setOffset(offset - 20)
-              reexecuteQuery({ requestPolicy: 'network-only' })
-            }}
-          >
-            Prev
-          </Button>
-          <Button
-            isDisabled={totalResult < 20}
-            onClick={() => {
-              setOffset(offset + 20)
-              reexecuteQuery({ requestPolicy: 'network-only' })
-            }}
-          >
-            Next
-          </Button>
-        </HStack>
-      </VStack>
-    </>
+        </Card>
+      </IonContent>
+    </IonPage>
   )
 }

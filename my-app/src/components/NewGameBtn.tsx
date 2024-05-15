@@ -4,8 +4,7 @@ import { useSubscription } from 'urql'
 import { useAccounts } from '../hooks/useAccounts'
 import { useHistory } from 'react-router-dom'
 import { ACTIONS_CONTRACT } from '../utils'
-import { Button } from '@chakra-ui/react'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import { Button, Preloader } from 'konsta/react'
 
 const CreatedEvent = graphql(`
   subscription Created($player: String) {
@@ -16,7 +15,7 @@ const CreatedEvent = graphql(`
   }
 `)
 
-export const Header = ({ title, onNewGame }: { title: string; onNewGame?: () => void }) => {
+export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
   const { account } = useAccounts()
   const [creating, setCreating] = useState(false)
   const history = useHistory()
@@ -34,7 +33,7 @@ export const Header = ({ title, onNewGame }: { title: string; onNewGame?: () => 
       return
     }
     setCreating(false)
-    history.push(`/${gameId}`)
+    history.push(`/game/${gameId}`)
   }, [createdEvent])
 
   const newGame = async () => {
@@ -53,24 +52,18 @@ export const Header = ({ title, onNewGame }: { title: string; onNewGame?: () => 
   }
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>New Game</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <Button
-          onClick={() => {
-            setCreating(true)
-            newGame()
-          }}
-          isLoading={creating}
-          visibility={account ? 'visible' : 'hidden'}
-        >
-          New Game
-        </Button>
-      </IonContent>
-    </IonPage>
+    <div className="px-4 my-8">
+      <Button
+        onClick={() => {
+          setCreating(true)
+          newGame()
+        }}
+        className="px-4"
+        disabled={!account?.address}
+        large
+      >
+        {creating && <Preloader />} New Game
+      </Button>
+    </div>
   )
 }

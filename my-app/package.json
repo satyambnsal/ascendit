@@ -30,8 +30,6 @@
     "@capacitor/ios": "^6.0.0",
     "@capacitor/preferences": "^6.0.0",
     "@capacitor/splash-screen": "latest",
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.8.2",
     "@dojoengine/core": "0.6.125",
     "@dojoengine/create-burner": "0.6.125",
     "@dojoengine/react": "0.6.125",
