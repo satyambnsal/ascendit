@@ -47,7 +47,7 @@ export const useAccounts = () => {
       setError({ isError: true, message: ERROR_MESSAGES.DOJO_PROVIDER_INIT_FAILED })
       return
     }
-    console.log('provider', dojoProvider)
+    // console.log('provider', dojoProvider)
     setIsLoading(true)
     const newBurnerManager = new BurnerManager({
       masterAccount: new Account(
@@ -103,7 +103,7 @@ export const useAccounts = () => {
       await setAccountToStorage(
         JSON.stringify({ address: newAccount.address, signer: newAccount.signer })
       )
-      console.log('new account', newAccount)
+      // console.log('new account', newAccount)
       setAccountData({ address: newAccount.address, signer: newAccount.signer })
     } else {
       setError({ isError: true, message: 'Failed to create new account from burner' })

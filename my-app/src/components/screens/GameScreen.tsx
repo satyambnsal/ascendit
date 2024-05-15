@@ -107,7 +107,7 @@ export const GameScreen = () => {
     queryResult?.data?.gameModels?.edges?.forEach((edge: any) => {
       setRemaining(edge.node.remaining_slots)
       setNext(edge.node.next_number)
-      console.log('player', edge.node.player)
+      // console.log('player', edge.node.player)
       setPlayer(edge.node.player)
       setMaxNum(edge.node.max_number)
 
@@ -131,7 +131,7 @@ export const GameScreen = () => {
         entrypoint: 'set_slot',
         calldata: [gameId, slot],
       })
-      console.log('transaction hash', transaction_hash)
+      // console.log('transaction hash', transaction_hash)
     } catch (e) {
       console.error(e)
       setErrorMessage('can not place number in this slot')
@@ -142,7 +142,7 @@ export const GameScreen = () => {
     return true
   }
 
-  console.log('player', player)
+  // console.log('player', player)
   return (
     <IonPage>
       <IonHeader>

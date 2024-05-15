@@ -43,17 +43,17 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
       onNewGame()
     }
     setCreating(true)
-    console.log('=== account ====', account)
+    // console.log('=== account ====', account)
 
     const { transaction_hash } = await account.execute({
       contractAddress: ACTIONS_CONTRACT,
       entrypoint: 'create',
       calldata: {},
     })
-    console.log(transaction_hash)
+    // console.log(transaction_hash)
   }
 
-  console.log('creating', creating)
+  // console.log('creating', creating)
 
   return (
     <div className="px-4 my-8">

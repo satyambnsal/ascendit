@@ -62,7 +62,7 @@ export const LeaderboardScreen = () => {
     }
   }, [result.data?.gameModels?.edges, totalResult])
 
-  console.log('total results', totalResult)
+  // console.log('total results', totalResult)
   return (
     <IonPage>
       <IonHeader>
