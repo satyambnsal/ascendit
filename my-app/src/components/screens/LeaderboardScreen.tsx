@@ -8,6 +8,7 @@ import { useAccounts } from '../../hooks/useAccounts'
 import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonIcon } from '@ionic/react'
 import {
   BlockTitle,
+  Button,
   Card,
   Icon,
   Link,
@@ -84,7 +85,11 @@ export const LeaderboardScreen = () => {
       </IonHeader>
       <IonContent>
         <BlockTitle>Leaderboard</BlockTitle>
-        <Card className="block overflow-x-auto mt-8" contentWrap={false} color="black">
+        <Card
+          className="block overflow-x-hidden overflow-y-scroll mt-8 h-5/6"
+          contentWrap={false}
+          color="black"
+        >
           <Table>
             <TableHead>
               <TableRow header>
@@ -93,7 +98,7 @@ export const LeaderboardScreen = () => {
                   Player
                 </TableCell>
                 <TableCell header className="text-left">
-                  Remaining Numbers
+                  Moves Left
                 </TableCell>
                 <TableCell header className="text-left">
                   Game ID
@@ -107,8 +112,9 @@ export const LeaderboardScreen = () => {
                   onClick={() => {
                     history.push(`/game/${edge.node.game_id}`)
                   }}
+                  className="flex"
                 >
-                  <TableCell>{index + offset + 1}</TableCell>
+                  <TableCell className="w-10">{index + offset + 1}</TableCell>
                   <TableCell className="text-left">
                     {formatAddress(edge.node.player)}{' '}
                     {account?.address === edge.node.player && <>(you)</>}{' '}
@@ -120,6 +126,27 @@ export const LeaderboardScreen = () => {
             </TableBody>
           </Table>
         </Card>
+        <div className="fixed bottom-4 flex justify-around w-full gap-8 px-8">
+          <Button
+            disabled={offset === 0}
+            onClick={() => {
+              setOffset(offset - 20)
+              reexecuteQuery({ requestPolicy: 'network-only' })
+            }}
+            className="w-32"
+          >
+            Prev
+          </Button>
+          <Button
+            disabled={totalResult < 20}
+            onClick={() => {
+              setOffset(offset + 20)
+              reexecuteQuery({ requestPolicy: 'network-only' })
+            }}
+          >
+            Next
+          </Button>
+        </div>
       </IonContent>
     </IonPage>
   )
