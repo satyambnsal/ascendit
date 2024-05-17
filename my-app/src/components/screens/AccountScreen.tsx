@@ -28,7 +28,7 @@ export const AccountScreen = () => {
                 </Button>
               </div>
             )}
-            <p className="font-semibold">OR</p>
+            {!!account && <p className="font-semibold">OR</p>}
             <Button onClick={createAccount} className="w-full" large>
               {!!isLoading && <Spinner className="mr-4" fill="white" />}
               Create New Account

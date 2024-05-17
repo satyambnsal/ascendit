@@ -86,7 +86,7 @@ export const LeaderboardScreen = () => {
       <IonContent>
         <BlockTitle>Leaderboard</BlockTitle>
         <Card
-          className="block overflow-x-hidden overflow-y-scroll mt-8 h-5/6"
+          className="block overflow-x-auto overflow-y-scroll mt-8 h-5/6"
           contentWrap={false}
           color="black"
         >

@@ -153,7 +153,7 @@ export const GameScreen = () => {
                 icon={arrowBackOutline}
                 size="large"
                 onClick={() => {
-                  history.goBack()
+                  history.push(`/leaderboard`)
                 }}
                 className="k-color-brand-green"
                 color="#A91D3A"
