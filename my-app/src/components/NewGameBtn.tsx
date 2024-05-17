@@ -4,8 +4,8 @@ import { useSubscription } from 'urql'
 import { useAccounts } from '../hooks/useAccounts'
 import { useHistory } from 'react-router-dom'
 import { ACTIONS_CONTRACT } from '../utils'
-import { Button, Preloader } from 'konsta/react'
 import { Spinner } from './Spinner'
+import { Button } from './ui/button'
 
 const CreatedEvent = graphql(`
   subscription Created($player: String) {
@@ -56,18 +56,18 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
   // console.log('creating', creating)
 
   return (
-    <div className="px-4 my-8">
       <Button
         onClick={() => {
           setCreating(true)
           newGame()
         }}
-        className="px-4"
+        className="px-4 min-w-[100px]"
         disabled={!account?.address}
-        large
       >
-        {creating && <Spinner className="mr-4" fill="white" />} New Game
+        {creating && <Spinner className="w-4" fill="white" />}
+        {!creating && <span className="">New Game</span> }
+        
+         
       </Button>
-    </div>
   )
 }

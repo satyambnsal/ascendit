@@ -6,21 +6,17 @@ import { useEffect, useState } from 'react'
 import { formatAddress } from '../../utils'
 import { useAccounts } from '../../hooks/useAccounts'
 import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonIcon } from '@ionic/react'
+import { arrowBackOutline } from 'ionicons/icons'
+import { Button } from '../ui/button'
 import {
-  BlockTitle,
-  Button,
-  Card,
-  Icon,
-  Link,
-  Navbar,
-  NavbarBackLink,
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
+  TableHeader,
   TableRow,
-} from 'konsta/react'
-import { arrowBackOutline } from 'ionicons/icons'
+} from "../ui/table"
 
 const GamesQuery = graphql(`
   query Games($offset: Int) {
@@ -67,86 +63,88 @@ export const LeaderboardScreen = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <Link>
+        <IonToolbar className='flex items-center text-center'>
+          <Button 
+          className='flex items-center gap-2 absolute left-4'
+          variant="secondary" 
+             onClick={() => {
+                history.goBack()
+              }}>
             <IonIcon
               icon={arrowBackOutline}
-              size="large"
-              onClick={() => {
-                history.goBack()
-              }}
+              size="small"
               className="k-color-brand-green"
               color="#A91D3A"
-            />{' '}
+            />
             Go Back
-          </Link>
+          </Button>
           <NewGameBtn />
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <BlockTitle>Leaderboard</BlockTitle>
-        <Card
-          className="block overflow-x-auto overflow-y-scroll mt-8 h-5/6"
-          contentWrap={false}
-          color="black"
-        >
-          <Table>
-            <TableHead>
-              <TableRow header>
-                <TableCell header>Ranking</TableCell>
-                <TableCell header className="text-left">
-                  Player
-                </TableCell>
-                <TableCell header className="text-left">
-                  Moves Left
-                </TableCell>
-                <TableCell header className="text-left">
-                  Game ID
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {gameResults.map((edge: any, index) => (
-                <TableRow
-                  key={edge.node.game_id}
-                  onClick={() => {
-                    history.push(`/game/${edge.node.game_id}`)
-                  }}
-                  className="flex"
-                >
-                  <TableCell className="w-10">{index + offset + 1}</TableCell>
-                  <TableCell className="text-left">
-                    {formatAddress(edge.node.player)}{' '}
-                    {account?.address === edge.node.player && <>(you)</>}{' '}
-                  </TableCell>
-                  <TableCell className="text-center">{edge.node.remaining_slots}</TableCell>
-                  <TableCell className="text-center">{edge.node.game_id.toString(16)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Card>
-        <div className="fixed bottom-4 flex justify-around w-full gap-8 px-8">
-          <Button
-            disabled={offset === 0}
-            onClick={() => {
-              setOffset(offset - 20)
-              reexecuteQuery({ requestPolicy: 'network-only' })
-            }}
-            className="w-32"
-          >
-            Prev
-          </Button>
-          <Button
-            disabled={totalResult < 20}
-            onClick={() => {
-              setOffset(offset + 20)
-              reexecuteQuery({ requestPolicy: 'network-only' })
-            }}
-          >
-            Next
-          </Button>
+        <div className="p-4 max-w-[800px] mx-auto">
+          <div className="border border-[#eee] mb-16" contentWrap={false}>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[100px]">Ranking</TableHead>
+                    <TableHead>Player</TableHead>
+                    <TableHead>Moves Left</TableHead>
+                    <TableHead className="text-right">Game ID</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+
+                {gameResults.map((edge: any, index) => (
+                    <TableRow
+                      key={edge.node.game_id}
+                      onClick={() => {
+                        history.push(`/game/${edge.node.game_id}`)
+                      }}
+                    >
+                      <TableCell>{index + offset + 1}</TableCell>
+                      <TableCell>
+                        {formatAddress(edge.node.player)}{' '}
+                        {account?.address === edge.node.player && <>(you)</>}{' '}
+                      </TableCell>
+                      <TableCell>{edge.node.remaining_slots}</TableCell>
+                      <TableCell>{edge.node.game_id.toString(16)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+          </div>
+          <div className="fixed bottom-0 left-0 right-0 w-full">
+            <div className='max-w-[800px] mx-auto gap-8 bg-white py-4'>
+              <div className='flex justify-around items-center'>
+              <Button
+              variant="outline"
+              className='flex-grow-1'
+                disabled={offset === 0}
+                onClick={() => {
+                  setOffset(offset - 20)
+                  reexecuteQuery({ requestPolicy: 'network-only' })
+                }}
+              >
+                Prev
+              </Button>
+              <Button
+              variant="outline"
+              className='flex-grow-1'
+                disabled={totalResult < 20}
+                onClick={() => {
+                  setOffset(offset + 20)
+                  reexecuteQuery({ requestPolicy: 'network-only' })
+                }}
+              >
+                Next
+              </Button>
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </IonContent>
     </IonPage>
   )

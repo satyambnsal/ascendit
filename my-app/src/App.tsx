@@ -2,15 +2,14 @@ import { IonApp, IonRouterOutlet } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { Route } from 'react-router'
 import { GameScreen, AccountScreen, LeaderboardScreen } from './components'
-import { KonstaProvider } from 'konsta/react'
+import { BottomTabs } from './components/BottomTabs.tsx'
 
 export const App = () => {
   return (
-    <KonstaProvider theme="ios">
       <div className="safe-areas">
         <IonApp>
           <IonReactRouter>
-            <IonRouterOutlet>
+            <IonRouterOutlet className='pb-12'>
               <Route path="/leaderboard" component={LeaderboardScreen} />
               <Route path="/game/:gameId" component={GameScreen} />
               <Route exact path="/" component={AccountScreen} />
@@ -18,6 +17,5 @@ export const App = () => {
           </IonReactRouter>
         </IonApp>
       </div>
-    </KonstaProvider>
   )
 }

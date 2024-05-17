@@ -1,12 +1,12 @@
 import { IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react'
 import { graphql } from 'gql.tada'
-import { Block, Button, Link, Navbar, NavbarBackLink, Preloader, Toast } from 'konsta/react'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { useAccounts } from '../../hooks/useAccounts'
 import { useQuery, useSubscription } from 'urql'
 import { ACTIONS_CONTRACT, formatAddress } from '../../utils'
 import { arrowBackOutline } from 'ionicons/icons'
+import { Button } from '../ui/button'
 
 const GameQuery = graphql(`
   query GameQuery($gameId: u32) {
@@ -60,7 +60,7 @@ export const GameScreen = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <Link>
+            <a href='#'>
               <IonIcon
                 icon={arrowBackOutline}
                 size="large"
@@ -70,7 +70,7 @@ export const GameScreen = () => {
                 className="k-color-brand-green"
                 color="#A91D3A"
               />
-            </Link>
+            </a>
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -146,21 +146,24 @@ export const GameScreen = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar className='text-center'>
           <div>
-            <Link>
+            <Button 
+             className='flex items-center gap-2 absolute left-4 top-3'
+             variant="secondary"
+             onClick={() => {
+              history.push(`/leaderboard`)
+            }}>
               <IonIcon
                 icon={arrowBackOutline}
-                size="large"
-                onClick={() => {
-                  history.push(`/leaderboard`)
-                }}
+                size="small"
                 className="k-color-brand-green"
                 color="#A91D3A"
               />
               Go Back
-            </Link>
-            <div className="flex justify-between py-6 px-4">
+              </Button>
+              <br />
+            <div className="flex justify-between pb-6 pt-14 px-4">
               <strong>
                 {formatAddress(player)} {isOwner && '(you)'}
               </strong>
@@ -170,13 +173,14 @@ export const GameScreen = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <Block>
+        <div className='p-4 max-w-[500px] mx-auto'>
+        <div className='mb-4'>
           <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
           <p>
             Remaining: <strong>{remaining}</strong>
           </p>
-        </Block>
-        <div className="flex flex-row justify-around overflow-hidden">
+        </div>
+        <div className="grid grid-cols-2 overflow-hidden">
           <div className="flex flex-col gap-2">
             {slots.slice(0, 10).map((number, index) => (
               <Slot
@@ -206,7 +210,9 @@ export const GameScreen = () => {
             ))}
           </div>
         </div>
-        <Toast
+        </div>
+
+        {/* <Toast
           position="center"
           opened={showErrorToast}
           button={
@@ -216,7 +222,7 @@ export const GameScreen = () => {
           }
         >
           <div className="shrink">{errorMessage}</div>
-        </Toast>
+        </Toast> */}
       </IonContent>
     </IonPage>
   )
@@ -235,14 +241,15 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
   return (
     <div key={index} className="flex gap-4 flex-nowrap items-center">
       <p className="w-6">{index + 1}</p>
-      <div className="w-32">
+      <div className='w-full'>
         {number ? (
-          <Button disabled={true} color="k-color-brand-green" large>
+          <Button disabled={true} className='w-full max-w-[100px]'>
             {number}
           </Button>
         ) : (
           <Button
             disabled={!isOwner || disableAll}
+            className='w-full max-w-[100px]'
             onClick={async () => {
               setLoading(true)
               const success = await onClick(index)
@@ -250,9 +257,9 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
                 setLoading(false)
               }
             }}
-            large
           >
-            {loading && <Preloader />}
+            {loading && <div className="">Loading</div> }
+            {" "}
             {isOwner ? 'Set' : 'Empty'}
           </Button>
         )}
