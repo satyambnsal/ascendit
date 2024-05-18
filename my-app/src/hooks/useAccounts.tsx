@@ -7,6 +7,7 @@ import { useProvider } from './useProvider'
 import { Preferences } from '@capacitor/preferences'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { accountAtom, accountDataAtom } from '../state/atoms'
+import { useToast } from '@/components/ui/use-toast'
 
 const setAccountToStorage = async (account: string) => {
   await Preferences.set({
@@ -21,11 +22,12 @@ const getAccountFromStorage = async () => {
 }
 
 const removeAccountFromStorage = async () => {
-  await Preferences.remove({ key: 'primary_account' })
+  await Preferences.remove({ key: 'primary_accounts' })
 }
 
 export const useAccounts = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
   const [error, setError] = useState<{ isError: boolean; message?: string; errorObject?: unknown }>(
     {
       isError: false,
@@ -48,7 +50,6 @@ export const useAccounts = () => {
       return
     }
     // console.log('provider', dojoProvider)
-    setIsLoading(true)
     const newBurnerManager = new BurnerManager({
       masterAccount: new Account(
         {
@@ -63,7 +64,6 @@ export const useAccounts = () => {
     })
     await newBurnerManager.init()
     setBurnerManager(newBurnerManager)
-    setIsLoading(false)
     return newBurnerManager
   }
 
@@ -109,12 +109,20 @@ export const useAccounts = () => {
       setError({ isError: true, message: 'Failed to create new account from burner' })
     }
     setIsLoading(false)
+    toast({
+      title: 'Wallet Created successfully',
+      description: `We have a new burner wallet with address ${newAccount?.address}`,
+    })
     return newAccount || null
   }
 
   const removeAccount = async () => {
     setAccountData(null)
     removeAccountFromStorage()
+    toast({
+      title: 'Wallet deleted successfully',
+      description: 'We have deleted your wallet',
+    })
   }
 
   useEffect(() => {

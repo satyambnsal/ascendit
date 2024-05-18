@@ -15,12 +15,7 @@ export const Spinner = ({
 
   return (
     <div className={clsx('flex items-center justify-center', className)}>
-      <svg
-        className={`animate-spin ${sizeClass} ${fillClass}`}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
+      <svg className={`animate-spin ${sizeClass} ${fillClass}`} fill="none" viewBox="0 0 24 24">
         <circle
           className="opacity-25"
           cx="12"
