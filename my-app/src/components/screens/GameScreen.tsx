@@ -5,8 +5,10 @@ import { useHistory, useParams } from 'react-router'
 import { useAccounts } from '../../hooks/useAccounts'
 import { useQuery, useSubscription } from 'urql'
 import { ACTIONS_CONTRACT, formatAddress } from '../../utils'
-import { arrowBackOutline } from 'ionicons/icons'
+import { arrowBackOutline, arrowForwardOutline, handRight } from 'ionicons/icons'
 import { Button } from '../ui/button'
+import { BottomTabs } from '../BottomTabs'
+import { Spinner } from '../Spinner'
 
 const GameQuery = graphql(`
   query GameQuery($gameId: u32) {
@@ -58,21 +60,26 @@ export const GameScreen = () => {
   if (!gameId) {
     return (
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <a href='#'>
+          <IonHeader>
+        <IonToolbar className='text-center'>
+          <div className='flex items-center justify-between px-4'>
+            <Button 
+             className='flex items-center gap-2 !pe-2 ps-0'
+             variant="secondary"
+             onClick={() => {
+              history.push(`/leaderboard`)
+            }}>
               <IonIcon
                 icon={arrowBackOutline}
-                size="large"
-                onClick={() => {
-                  history.goBack()
-                }}
+                size="small"
                 className="k-color-brand-green"
                 color="#A91D3A"
               />
-            </a>
-          </IonToolbar>
-        </IonHeader>
+              Go Back
+              </Button>
+          </div>
+        </IonToolbar>
+      </IonHeader>
         <IonContent>
           <h1>No games available matching game id ${gameId}</h1>
         </IonContent>
@@ -147,9 +154,9 @@ export const GameScreen = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className='text-center'>
-          <div>
+          <div className='flex items-center justify-between px-4'>
             <Button 
-             className='flex items-center gap-2 absolute left-4 top-3'
+             className='flex items-center gap-2 !pe-2 ps-0'
              variant="secondary"
              onClick={() => {
               history.push(`/leaderboard`)
@@ -162,26 +169,45 @@ export const GameScreen = () => {
               />
               Go Back
               </Button>
-              <br />
-            <div className="flex justify-between pb-6 pt-14 px-4">
+            <div>
               <strong>
                 {formatAddress(player)} {isOwner && '(you)'}
               </strong>
-              <strong className="">Next Number: {next}</strong>
             </div>
           </div>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className='p-4 max-w-[500px] mx-auto'>
+        <div className='p-4'>
         <div className='mb-4'>
-          <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
-          <p>
-            Remaining: <strong>{remaining}</strong>
-          </p>
+          <div className='mb-4'>
+
+            <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
+            <p>
+              Remaining: <strong>{remaining}</strong>
+            </p>
+
+          </div>
+
+          <div className='px-6 py-3 border border-gray-400 rounded-md text-center flex items-center justify-center gap-4'>
+            <div className='flex items-center gap-1'>
+              <span>
+              Next Number 
+              </span>
+           <IonIcon
+            icon={arrowForwardOutline}
+            size="medium"
+            className='align-middle'
+          />
+
+            </div>
+            <div>
+             <strong className='text-2xl'>{next}</strong>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-2 overflow-hidden">
-          <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-evenly sm:justify-center overflow-hidden">
+          <div className="flex flex-col gap-2 min-w-[150px]">
             {slots.slice(0, 10).map((number, index) => (
               <Slot
                 index={index}
@@ -195,7 +221,7 @@ export const GameScreen = () => {
               />
             ))}
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 min-w-[150px]">
             {slots.slice(10, 20).map((number, index) => (
               <Slot
                 index={index + 10}
@@ -224,6 +250,8 @@ export const GameScreen = () => {
           <div className="shrink">{errorMessage}</div>
         </Toast> */}
       </IonContent>
+
+      <BottomTabs />
     </IonPage>
   )
 }
@@ -243,13 +271,13 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
       <p className="w-6">{index + 1}</p>
       <div className='w-full'>
         {number ? (
-          <Button disabled={true} className='w-full max-w-[100px]'>
+          <Button disabled={true} className='w-full max-w-[100px] !bg-green-600'>
             {number}
           </Button>
         ) : (
           <Button
             disabled={!isOwner || disableAll}
-            className='w-full max-w-[100px]'
+            className={`w-full max-w-[100px]`}
             onClick={async () => {
               setLoading(true)
               const success = await onClick(index)
@@ -258,9 +286,8 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
               }
             }}
           >
-            {loading && <div className="">Loading</div> }
-            {" "}
-            {isOwner ? 'Set' : 'Empty'}
+            {loading && <div className=""> <Spinner className="w-4" fill="white" /></div> }
+            {!loading && <div className="">  {isOwner ? 'Set' : 'Empty'}</div> }
           </Button>
         )}
       </div>

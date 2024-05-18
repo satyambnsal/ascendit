@@ -61,13 +61,12 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
           setCreating(true)
           newGame()
         }}
-        className="px-4 min-w-[100px]"
+        className="min-w-[120px]"
         disabled={!account?.address}
       >
         {creating && <Spinner className="w-4" fill="white" />}
         {!creating && <span className="">New Game</span> }
         
-         
       </Button>
   )
 }

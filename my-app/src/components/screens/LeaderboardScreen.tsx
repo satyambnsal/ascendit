@@ -5,7 +5,7 @@ import { NewGameBtn } from '../NewGameBtn'
 import { useEffect, useState } from 'react'
 import { formatAddress } from '../../utils'
 import { useAccounts } from '../../hooks/useAccounts'
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonIcon } from '@ionic/react'
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonIcon, IonFooter } from '@ionic/react'
 import { arrowBackOutline } from 'ionicons/icons'
 import { Button } from '../ui/button'
 import {
@@ -17,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table"
+import { BottomTabs } from '../BottomTabs'
 
 const GamesQuery = graphql(`
   query Games($offset: Int) {
@@ -63,10 +64,11 @@ export const LeaderboardScreen = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className='flex items-center text-center'>
+        <IonToolbar className='text-center !py-2'>
+          <div className='flex justify-between items-center pe-4'>
           <Button 
-          className='flex items-center gap-2 absolute left-4'
-          variant="secondary" 
+          className='flex items-center gap-2 !pe-2 ps-0'
+             variant="secondary" 
              onClick={() => {
                 history.goBack()
               }}>
@@ -79,17 +81,22 @@ export const LeaderboardScreen = () => {
             Go Back
           </Button>
           <NewGameBtn />
+          </div>
+
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="p-4 max-w-[800px] mx-auto">
-          <div className="border border-[#eee] mb-16" contentWrap={false}>
+        <div className="p-4">
+          <h2 className='mb-4 text-center mt-0'>
+            Leaderboard
+          </h2>
+          <div className="border border-[#eee] mb-36">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[100px]">Ranking</TableHead>
-                    <TableHead>Player</TableHead>
-                    <TableHead>Moves Left</TableHead>
+                    <TableHead className='text-center'>Player</TableHead>
+                    <TableHead className='text-center'>Moves Left</TableHead>
                     <TableHead className="text-right">Game ID</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -103,19 +110,19 @@ export const LeaderboardScreen = () => {
                       }}
                     >
                       <TableCell>{index + offset + 1}</TableCell>
-                      <TableCell>
+                      <TableCell className='text-center'>
                         {formatAddress(edge.node.player)}{' '}
                         {account?.address === edge.node.player && <>(you)</>}{' '}
                       </TableCell>
-                      <TableCell>{edge.node.remaining_slots}</TableCell>
-                      <TableCell>{edge.node.game_id.toString(16)}</TableCell>
+                      <TableCell className='text-center'>{edge.node.remaining_slots}</TableCell>
+                      <TableCell className='text-end'>{edge.node.game_id.toString(16)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
           </div>
-          <div className="fixed bottom-0 left-0 right-0 w-full">
-            <div className='max-w-[800px] mx-auto gap-8 bg-white py-4'>
+          <div className="fixed bottom-[85px] left-0 right-0 w-full">
+            <div className='gap-8 bg-white py-4'>
               <div className='flex justify-around items-center'>
               <Button
               variant="outline"
@@ -146,6 +153,7 @@ export const LeaderboardScreen = () => {
         </div>
 
       </IonContent>
+            <BottomTabs />
     </IonPage>
   )
 }
