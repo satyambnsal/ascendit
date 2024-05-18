@@ -22,7 +22,7 @@ export const Settings = () => {
               className="flex items-center gap-2 !pe-2 ps-0"
               variant="secondary"
               onClick={() => {
-                history.push(`/leaderboard`)
+                history.goBack()
               }}
             >
               <IonIcon

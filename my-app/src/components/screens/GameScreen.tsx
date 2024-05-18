@@ -68,7 +68,7 @@ export const GameScreen = () => {
              className='flex items-center gap-2 !pe-2 ps-0'
              variant="secondary"
              onClick={() => {
-              history.push(`/leaderboard`)
+              history.goBack()
             }}>
               <IonIcon
                 icon={arrowBackOutline}
@@ -160,7 +160,7 @@ export const GameScreen = () => {
              className='flex items-center gap-2 !pe-2 ps-0'
              variant="secondary"
              onClick={() => {
-              history.push(`/leaderboard`)
+              history.goBack()
             }}>
               <IonIcon
                 icon={arrowBackOutline}
@@ -180,7 +180,7 @@ export const GameScreen = () => {
       </IonHeader>
       <IonContent>
         <div className='mb-4'>
-          <div className='mb-4 p-3'>
+          <div className='sm:my-4 p-3'>
 
             <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
             <p>
