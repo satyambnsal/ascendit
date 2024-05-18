@@ -74,7 +74,9 @@ export const Settings = () => {
             </Button>
           )}
           {account?.address && (
-            <ScoreTable type="player" title="Your Games" address={account.address} />
+            <>
+              <ScoreTable type="player" title="Your Games" address={account.address} />
+            </>
           )}
         </div>
       </IonContent>

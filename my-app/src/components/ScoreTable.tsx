@@ -87,7 +87,18 @@ export const ScoreTable = ({ title, type, address }: ScoreTableProps) => {
 
   return (
     <div className="py-4">
-      <h2 className="mb-4 mt-0 px-3">{title}</h2>
+      <div className="flex justify-between items-center px-2 mb-1">
+        <h2 className="">{title}</h2>
+        <Button
+          onClick={() => {
+            reexecuteQuery({ requestPolicy: 'network-only' })
+          }}
+          variant="outline"
+        >
+          Refresh
+        </Button>
+      </div>
+
       <div className="border border-[#eee] mb-36">
         <Table>
           <TableHeader>

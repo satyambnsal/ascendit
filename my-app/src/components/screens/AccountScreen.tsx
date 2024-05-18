@@ -27,49 +27,47 @@ export const AccountScreen = () => {
             alt="Ascend It logo"
             className="h-8 rounded-full absolute left-3 top-1/2 -translate-y-1/2"
           />
-          <IonTitle>Ascend It</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <div className="bg-slate-50 h-full">
-          <div className="">
-            <div className="flex justify-center ">
-              <img
-                src={logo}
-                alt="Ascend It logo"
-                className="w-64 h-64 my-8 block object-cover rounded-md"
-              />
-            </div>
-            <div className="w-full px-4 justify-center items-center flex flex-col h-48 gap-8 text-center w-full">
-              {!!account && (
-                <div className="w-full">
-                  <label className="font-semibold mb-4 block">Use Existing Wallet</label>
-                  <Button
-                    onClick={() => {
-                      history.push('/leaderboard')
-                    }}
-                    className="min-h-12 max-w-64 w-full"
-                  >
-                    {trimStringWithEllipsis(account?.address)}
-                  </Button>
-                </div>
-              )}
-              {!!account && (
-                <div className="flex items-center w-full">
-                  <div className="border-solid border-b border-b-[#EEE] w-full"></div>
-                  <div className="px-3">Or</div>
-                  <div className="border-solid border-b border-b-[#EEE] w-full"></div>
-                </div>
-              )}
-              <Button
-                onClick={createAccount}
-                className="min-h-12 flex items-center justify-center max-w-64 w-full"
-                size="lg"
-              >
-                {!!isLoading && <Spinner className="text-white" />}
-                {!isLoading && <span className="">Create New Wallet</span>}
-              </Button>
-            </div>
+      <IonContent class="m-0 p-0">
+        <div className="bg-slate-50 h-full relative">
+          <h1 className="text-center">Ascend It</h1>
+          <div className="flex justify-center">
+            <img
+              src={logo}
+              alt="Ascend It logo"
+              className="w-64 h-64 my-8 block object-cover rounded-md"
+            />
+          </div>
+          <div className="absolute bottom-24 px-4 justify-center items-center flex flex-col h-48 gap-8 text-center w-full">
+            {!!account && (
+              <div className="w-full">
+                <label className="font-semibold mb-4 block">Use Existing Wallet</label>
+                <Button
+                  onClick={() => {
+                    history.push('/leaderboard')
+                  }}
+                  className="min-h-12 max-w-64 w-full"
+                >
+                  {trimStringWithEllipsis(account?.address)}
+                </Button>
+              </div>
+            )}
+            {!!account && (
+              <div className="flex items-center w-full">
+                <div className="border-solid border-b border-b-[#EEE] w-full"></div>
+                <div className="px-3">Or</div>
+                <div className="border-solid border-b border-b-[#EEE] w-full"></div>
+              </div>
+            )}
+            <Button
+              onClick={createAccount}
+              className="min-h-12 flex items-center justify-center max-w-64 w-full"
+              size="lg"
+            >
+              {!!isLoading && <Spinner className="text-white" />}
+              {!isLoading && <span className="">Create New Wallet</span>}
+            </Button>
           </div>
         </div>
       </IonContent>
