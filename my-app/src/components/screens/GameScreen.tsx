@@ -269,7 +269,7 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
             {loading && (
               <div className="">
                 {' '}
-                <Spinner className="w-4" fill="white" />
+                <Spinner className="w-4" />
               </div>
             )}
             {!loading && <div className=""> {isOwner ? 'Set' : 'Empty'}</div>}

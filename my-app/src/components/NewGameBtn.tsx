@@ -56,17 +56,16 @@ export const NewGameBtn = ({ onNewGame }: { onNewGame?: () => void }) => {
   // console.log('creating', creating)
 
   return (
-      <Button
-        onClick={() => {
-          setCreating(true)
-          newGame()
-        }}
-        className="min-w-[120px]"
-        disabled={!account?.address}
-      >
-        {creating && <Spinner className="w-4" fill="white" />}
-        {!creating && <span className="">New Game</span> }
-        
-      </Button>
+    <Button
+      onClick={() => {
+        setCreating(true)
+        newGame()
+      }}
+      className="min-w-[120px]"
+      disabled={!account?.address}
+    >
+      {creating && <Spinner className="w-4" />}
+      {!creating && <span className="">New Game</span>}
+    </Button>
   )
 }
