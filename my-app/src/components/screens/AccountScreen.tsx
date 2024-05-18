@@ -29,8 +29,8 @@ export const AccountScreen = () => {
           />
         </IonToolbar>
       </IonHeader>
-      <IonContent class="m-0 p-0">
-        <div className="bg-slate-50 h-full relative">
+      <IonContent>
+        <div className="bg-slate-50 h-full relative flex flex-col pb-12">
           <h1 className="text-center">Ascend It</h1>
           <div className="flex justify-center">
             <img
@@ -39,7 +39,7 @@ export const AccountScreen = () => {
               className="w-64 h-64 my-8 block object-cover rounded-md"
             />
           </div>
-          <div className="absolute bottom-24 px-4 justify-center items-center flex flex-col h-48 gap-8 text-center w-full">
+          <div className="px-4 justify-center items-center flex flex-col gap-8 text-center w-full mt-auto">
             {!!account && (
               <div className="w-full">
                 <label className="font-semibold mb-4 block">Use Existing Wallet</label>

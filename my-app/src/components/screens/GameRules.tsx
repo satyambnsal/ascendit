@@ -13,7 +13,7 @@ export const GameRules = () => {
           <div className="flex items-center justify-between px-4">
             <Button
               className="flex items-center gap-2 !pe-2 ps-0"
-              variant="secondary"
+              variant="outline"
               onClick={() => {
                 history.goBack()
               }}
