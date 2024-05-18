@@ -9,7 +9,8 @@ import { arrowBackOutline, arrowForwardOutline, handRight } from 'ionicons/icons
 import { Button } from '../ui/button'
 import { BottomTabs } from '../BottomTabs'
 import { Spinner } from '../Spinner'
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from '@/components/ui/skeleton'
+import { useToast } from '../ui/use-toast'
 
 const GameQuery = graphql(`
   query GameQuery($gameId: u32) {
@@ -55,32 +56,32 @@ export const GameScreen = () => {
   const [disableAll, setDisableAll] = useState(false)
   const [maxNum, setMaxNum] = useState<number>()
   const { account } = useAccounts()
-  const [showErrorToast, setErrorToast] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('false')
+  const { toast } = useToast()
 
   if (!gameId) {
     return (
       <IonPage>
-          <IonHeader>
-        <IonToolbar className='text-center'>
-          <div className='flex items-center justify-between px-4'>
-            <Button 
-             className='flex items-center gap-2 !pe-2 ps-0'
-             variant="secondary"
-             onClick={() => {
-              history.goBack()
-            }}>
-              <IonIcon
-                icon={arrowBackOutline}
-                size="small"
-                className="k-color-brand-green"
-                color="#A91D3A"
-              />
-              Go Back
+        <IonHeader>
+          <IonToolbar className="text-center">
+            <div className="flex items-center justify-between px-4">
+              <Button
+                className="flex items-center gap-2 !pe-2 ps-0"
+                variant="secondary"
+                onClick={() => {
+                  history.goBack()
+                }}
+              >
+                <IonIcon
+                  icon={arrowBackOutline}
+                  size="small"
+                  className="k-color-brand-green"
+                  color="#A91D3A"
+                />
+                Go Back
               </Button>
-          </div>
-        </IonToolbar>
-      </IonHeader>
+            </div>
+          </IonToolbar>
+        </IonHeader>
         <IonContent>
           <h1>No games available matching game id ${gameId}</h1>
         </IonContent>
@@ -142,9 +143,8 @@ export const GameScreen = () => {
       // console.log('transaction hash', transaction_hash)
     } catch (e) {
       console.error(e)
-      setErrorMessage('can not place number in this slot')
+      toast({ variant: 'destructive', title: 'Can not put number in this slot', description: '' })
       setDisableAll(false)
-      setErrorToast(true)
       return false
     }
     return true
@@ -154,14 +154,15 @@ export const GameScreen = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className='text-center'>
-          <div className='flex items-center justify-between px-4'>
-            <Button 
-             className='flex items-center gap-2 !pe-2 ps-0'
-             variant="secondary"
-             onClick={() => {
-              history.goBack()
-            }}>
+        <IonToolbar className="text-center">
+          <div className="flex items-center justify-between px-4">
+            <Button
+              className="flex items-center gap-2 !pe-2 ps-0"
+              variant="secondary"
+              onClick={() => {
+                history.goBack()
+              }}
+            >
               <IonIcon
                 icon={arrowBackOutline}
                 size="small"
@@ -169,7 +170,7 @@ export const GameScreen = () => {
                 color="#A91D3A"
               />
               Go Back
-              </Button>
+            </Button>
             <div>
               <strong>
                 {formatAddress(player)} {isOwner && '(you)'}
@@ -179,31 +180,22 @@ export const GameScreen = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className='mb-4'>
-          <div className='sm:my-4 p-3'>
-
+        <div className="mb-4">
+          <div className="sm:my-4 p-3">
             <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
             <p>
-              Remaining: <strong>{remaining}</strong>
+              Remaining Numbers: <strong>{remaining}</strong>
             </p>
-
           </div>
 
-          <div className='px-6 py-3 border border-gray-400 text-center flex items-center justify-center gap-4'>
-            <div className='flex items-center gap-1'>
-              <span>
-              Next Number 
-              </span>
-           <IonIcon
-            icon={arrowForwardOutline}
-            size="medium"
-            className='align-middle'
-          />
-
+          <div className="px-6 py-3 border border-gray-400 text-center flex items-center justify-center gap-4">
+            <div className="flex items-center gap-1">
+              <span>Next Number</span>
+              <IonIcon icon={arrowForwardOutline} size="medium" className="align-middle" />
             </div>
             <div>
-             <strong className='text-2xl min-w-[42px] min-h-[32px] block'>
-                 {!next ? <Skeleton className='w-full h-6 rounded-md' /> : next}
+              <strong className="text-2xl min-w-[42px] min-h-[32px] block">
+                {!next ? <Skeleton className="w-full h-6 rounded-md" /> : next}
               </strong>
             </div>
           </div>
@@ -238,20 +230,7 @@ export const GameScreen = () => {
             ))}
           </div>
         </div>
-
-        {/* <Toast
-          position="center"
-          opened={showErrorToast}
-          button={
-            <Button rounded clear small inline onClick={() => setErrorToast(false)}>
-              Close
-            </Button>
-          }
-        >
-          <div className="shrink">{errorMessage}</div>
-        </Toast> */}
       </IonContent>
-
       <BottomTabs />
     </IonPage>
   )
@@ -270,9 +249,9 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
   return (
     <div key={index} className="flex gap-4 flex-nowrap items-center">
       <p className="w-6">{index + 1}</p>
-      <div className='w-full'>
+      <div className="w-full">
         {number ? (
-          <Button disabled={true} className='w-full max-w-[100px] !bg-green-600'>
+          <Button disabled={true} className="w-full max-w-[100px] !bg-green-600">
             {number}
           </Button>
         ) : (
@@ -287,8 +266,13 @@ export const Slot = ({ index, number, isOwner, disableAll, onClick }: SlotProps)
               }
             }}
           >
-            {loading && <div className=""> <Spinner className="w-4" fill="white" /></div> }
-            {!loading && <div className="">  {isOwner ? 'Set' : 'Empty'}</div> }
+            {loading && (
+              <div className="">
+                {' '}
+                <Spinner className="w-4" fill="white" />
+              </div>
+            )}
+            {!loading && <div className=""> {isOwner ? 'Set' : 'Empty'}</div>}
           </Button>
         )}
       </div>

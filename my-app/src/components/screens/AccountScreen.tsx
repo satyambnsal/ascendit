@@ -1,4 +1,13 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSpinner, IonItem, IonLabel } from '@ionic/react'
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonSpinner,
+  IonItem,
+  IonLabel,
+} from '@ionic/react'
 import { trimStringWithEllipsis } from '../../utils'
 import { Spinner } from '../Spinner'
 import logo from '../../assets/icon.png'
@@ -25,7 +34,11 @@ export const AccountScreen = () => {
         <div className="bg-slate-50 h-full">
           <div className="">
             <div className="flex justify-center ">
-              <img src={logo} alt="Ascend It logo" className="w-64 h-64 my-8 block object-cover rounded-md" />
+              <img
+                src={logo}
+                alt="Ascend It logo"
+                className="w-64 h-64 my-8 block object-cover rounded-md"
+              />
             </div>
             <div className="w-full px-4 justify-center items-center flex flex-col h-48 gap-8 text-center w-full">
               {!!account && (
@@ -53,9 +66,7 @@ export const AccountScreen = () => {
                 className="min-h-12 flex items-center justify-center max-w-64 w-full"
                 size="lg"
               >
-                {!!isLoading &&    
-        <IonSpinner name="bubbles" className='text-white'></IonSpinner>
-      }
+                {!!isLoading && <Spinner className="text-white" />}
                 {!isLoading && <span className="">Create New Wallet</span>}
               </Button>
             </div>

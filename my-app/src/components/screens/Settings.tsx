@@ -1,18 +1,16 @@
 import { IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react'
-import { arrowBackOutline, logOutOutline, trashBin } from 'ionicons/icons'
+import { arrowBackOutline, trashBin } from 'ionicons/icons'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { BottomTabs } from '../BottomTabs'
 import { useAccounts } from '../../hooks/useAccounts'
 import { trimStringWithEllipsis } from '../../utils'
-import { useToast } from '@/components/ui/use-toast'
 import { Spinner } from '@/components/Spinner'
+import { ScoreTable } from '../ScoreTable'
 
 export const Settings = () => {
   const { account, removeAccount, createAccount, isLoading } = useAccounts()
   const history = useHistory()
-  const { toast } = useToast()
-  console.log('account', account)
   return (
     <IonPage>
       <IonHeader>
@@ -40,10 +38,10 @@ export const Settings = () => {
       <IonContent>
         <div className="px-4 pt-4 pb-24 h-full flex flex-col">
           {!!account?.address ? (
-            <div className="w-full">
+            <div className="w-full mb-8">
               <h2 className="text-xl">
-                Welcome, <br />
-                <p className="mt-4">{trimStringWithEllipsis(account?.address)}</p>
+                Welcome,
+                <span className="pl-1">{trimStringWithEllipsis(account?.address)}</span>
               </h2>
             </div>
           ) : (
@@ -52,7 +50,7 @@ export const Settings = () => {
               className="min-h-12 flex items-center justify-center max-w-80 w-full"
               size="lg"
             >
-              {!!isLoading && <Spinner className="w-6" fill="white" />}
+              {!!isLoading && <Spinner className="w-6" />}
               {!isLoading && <span className="">Create New Wallet</span>}
             </Button>
           )}
@@ -60,11 +58,10 @@ export const Settings = () => {
           {account?.address && (
             <Button
               variant="destructive"
-              className="w-full mt-auto"
+              className="w-full mb-8 min-h-12"
               size="lg"
               onClick={() => {
                 removeAccount()
-                
               }}
             >
               <IonIcon
@@ -75,6 +72,9 @@ export const Settings = () => {
               />
               Delete Wallet
             </Button>
+          )}
+          {account?.address && (
+            <ScoreTable type="player" title="Your Games" address={account.address} />
           )}
         </div>
       </IonContent>

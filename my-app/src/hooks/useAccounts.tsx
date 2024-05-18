@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ERROR_MESSAGES } from '../utils'
+import { ERROR_MESSAGES, formatAddress } from '../utils'
 import { BurnerManager } from '@dojoengine/create-burner'
-import { Account, SignerInterface } from 'starknet'
+import { Account, BigNumberish, SignerInterface } from 'starknet'
 import { dojoConfig as config } from '../../dojoConfig'
 import { useProvider } from './useProvider'
 import { Preferences } from '@capacitor/preferences'
@@ -111,7 +111,12 @@ export const useAccounts = () => {
     setIsLoading(false)
     toast({
       title: 'Wallet Created successfully',
-      description: <div className='truncate max-w-40'>We have a new burner wallet with address ${newAccount?.address}`</div>,
+      description: (
+        <div className="">
+          New burner wallet created with address
+          {formatAddress(newAccount?.address as BigNumberish)}
+        </div>
+      ),
     })
     return newAccount || null
   }
