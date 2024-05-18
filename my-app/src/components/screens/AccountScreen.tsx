@@ -21,13 +21,13 @@ export const AccountScreen = () => {
         <div className="bg-slate-50 h-full">
           <div className=''>
             <div className="flex justify-center ">
-              <img src={logo} alt="Ascend It logo" className="w-64 h-64 my-8 block" />
+              <img src={logo} alt="Ascend It logo" className="w-64 h-64 my-8 block object-cover" />
             </div>
-            <div className="w-full px-6 justify-center items-center flex flex-col h-48 gap-8 text-center">
+            <div className="w-full px-4 justify-center items-center flex flex-col h-48 gap-8 text-center w-full">
               {!!account && (
                 <div className="w-full">
                   <label className="font-semibold mb-4 block">Use Existing Wallet</label>
-                  <Button onClick={() => {history.push('/leaderboard')}} className='min-h-[40px] min-w-[164px]'>
+                  <Button onClick={() => {history.push('/leaderboard')}} className='min-h-12 max-w-64 w-full'>
                     {trimStringWithEllipsis(account?.address)}
                   </Button>
                 </div>
@@ -40,7 +40,7 @@ export const AccountScreen = () => {
                 <div className="border-solid border-b border-b-[#EEE] w-full"></div>
               </div>
               }
-              <Button onClick={createAccount} className="min-h-[40px] flex items-center justify-center min-w-[164px]">
+              <Button onClick={createAccount} className="min-h-12 flex items-center justify-center max-w-64 w-full" size="lg">
                 {!!isLoading && <Spinner className="w-6" fill="white" />}
                 {!isLoading && <span className="">Create New Wallet</span> }
               </Button>

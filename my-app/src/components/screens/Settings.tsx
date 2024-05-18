@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react'
-import { arrowBackOutline } from 'ionicons/icons'
+import { arrowBackOutline, logOutOutline, trashBin } from 'ionicons/icons'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { BottomTabs } from '../BottomTabs'
@@ -29,21 +29,40 @@ export const Settings = () => {
                 Go Back
                 </Button>
               <div>
+
+           
                 Settings
               </div>
             </div>
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <div className='px-4 pt-4 pb-24'>
-            Settings
-            {!!account && (
+          <div className='px-4 pt-4 pb-24 h-full flex flex-col'>
+          {!!account && (
+            <>
                 <div className="w-full">
-                  <Button onClick={() => {history.push('/leaderboard')}} className='min-h-[40px] min-w-[164px]'>
-                    {trimStringWithEllipsis(account?.address)}
-                  </Button>
-                </div>
+                  <h2 className='text-xl'>
+                    Welcome, <br />
+                    <p className='mt-4'>
+                     {trimStringWithEllipsis(account?.address)}
+                    </p>
+                  </h2>
+                  </div>
+                  <Button variant="destructive" className='w-full mt-auto' size="lg">
+
+                  <IonIcon
+                  icon={trashBin}
+                  size="small"
+                  className="k-color-brand-green mr-2"
+                  color="#A91D3A"
+                />
+                Delete Wallet
+                </Button>       
+            </>
               )}
+
+              
+               
           </div>
         </IonContent>
 

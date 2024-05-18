@@ -64,8 +64,8 @@ export const LeaderboardScreen = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className='text-center !py-2'>
-          <div className='flex justify-between items-center pe-4'>
+        <IonToolbar className='text-center'>
+          <div className='flex justify-between items-center px-3 py-1'>
           <Button 
           className='flex items-center gap-2 !pe-2 ps-0'
              variant="secondary" 
@@ -86,7 +86,7 @@ export const LeaderboardScreen = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="p-4">
+        <div className="py-4">
           <h2 className='mb-4 text-center mt-0'>
             Leaderboard
           </h2>
@@ -97,7 +97,7 @@ export const LeaderboardScreen = () => {
                     <TableHead className="w-[100px]">Ranking</TableHead>
                     <TableHead className='text-center'>Player</TableHead>
                     <TableHead className='text-center'>Moves Left</TableHead>
-                    <TableHead className="text-right">Game ID</TableHead>
+                    <TableHead className="text-center">Game ID</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -115,13 +115,13 @@ export const LeaderboardScreen = () => {
                         {account?.address === edge.node.player && <>(you)</>}{' '}
                       </TableCell>
                       <TableCell className='text-center'>{edge.node.remaining_slots}</TableCell>
-                      <TableCell className='text-end'>{edge.node.game_id.toString(16)}</TableCell>
+                      <TableCell className='text-center'>{edge.node.game_id.toString(16)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
           </div>
-          <div className="fixed bottom-[85px] left-0 right-0 w-full">
+          <div className="fixed bottom-[75px] left-0 right-0 w-full">
             <div className='gap-8 bg-white py-4'>
               <div className='flex justify-around items-center'>
               <Button

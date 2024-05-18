@@ -178,7 +178,6 @@ export const GameScreen = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className='p-4'>
         <div className='mb-4'>
           <div className='mb-4'>
 
@@ -235,7 +234,6 @@ export const GameScreen = () => {
               />
             ))}
           </div>
-        </div>
         </div>
 
         {/* <Toast
