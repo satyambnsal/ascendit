@@ -26,6 +26,7 @@ import {
   TableRow,
 } from '../ui/table'
 import { BottomTabs } from '../BottomTabs'
+import { Skeleton } from "@/components/ui/skeleton"
 
 const GamesQuery = graphql(`
   query Games($offset: Int) {
@@ -95,7 +96,7 @@ export const LeaderboardScreen = () => {
       </IonHeader>
       <IonContent>
         <div className="py-4">
-          <h2 className="mb-4 text-center mt-0">Leaderboard</h2>
+          <h2 className="mb-4 mt-0 px-3">Leaderboard</h2>
           <div className="border border-[#eee] mb-36">
             <Table>
               <TableHeader>
@@ -107,6 +108,21 @@ export const LeaderboardScreen = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
+
+                {
+                  gameResults.length <= 0 ? <>
+                   
+              {Array.from({ length: 20 }).map((_, index) => (
+                <TableRow key={index} >
+                  <TableCell><Skeleton className="h-5 w-5 rounded-full" /></TableCell>
+                  <TableCell><Skeleton className="h-5 w-[90px] rounded-md" /></TableCell>
+                  <TableCell><Skeleton className="h-5 w-10 rounded-md" /></TableCell>
+                  <TableCell><Skeleton className="h-5 w-10 rounded-md" /></TableCell>
+            </TableRow>
+         ))}
+
+                  </> : <>
+                  
                 {gameResults.map((edge: any, index) => (
                   <TableRow
                     key={edge.node.game_id}
@@ -123,6 +139,10 @@ export const LeaderboardScreen = () => {
                     <TableCell className="text-center">{edge.node.game_id.toString(16)}</TableCell>
                   </TableRow>
                 ))}
+                  </>
+                }
+
+    
               </TableBody>
             </Table>
           </div>

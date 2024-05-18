@@ -9,6 +9,7 @@ import { arrowBackOutline, arrowForwardOutline, handRight } from 'ionicons/icons
 import { Button } from '../ui/button'
 import { BottomTabs } from '../BottomTabs'
 import { Spinner } from '../Spinner'
+import { Skeleton } from "@/components/ui/skeleton"
 
 const GameQuery = graphql(`
   query GameQuery($gameId: u32) {
@@ -179,7 +180,7 @@ export const GameScreen = () => {
       </IonHeader>
       <IonContent>
         <div className='mb-4'>
-          <div className='mb-4'>
+          <div className='mb-4 p-3'>
 
             <p>Number range: {maxNum && <strong>1 - {maxNum}</strong>}</p>
             <p>
@@ -188,7 +189,7 @@ export const GameScreen = () => {
 
           </div>
 
-          <div className='px-6 py-3 border border-gray-400 rounded-md text-center flex items-center justify-center gap-4'>
+          <div className='px-6 py-3 border border-gray-400 text-center flex items-center justify-center gap-4'>
             <div className='flex items-center gap-1'>
               <span>
               Next Number 
@@ -201,7 +202,9 @@ export const GameScreen = () => {
 
             </div>
             <div>
-             <strong className='text-2xl'>{next}</strong>
+             <strong className='text-2xl min-w-[42px] min-h-[32px] block'>
+                 {!next ? <Skeleton className='w-full h-6 rounded-md' /> : next}
+              </strong>
             </div>
           </div>
         </div>
