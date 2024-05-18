@@ -111,7 +111,7 @@ export const useAccounts = () => {
     setIsLoading(false)
     toast({
       title: 'Wallet Created successfully',
-      description: `We have a new burner wallet with address ${newAccount?.address}`,
+      description: <div className='truncate max-w-40'>We have a new burner wallet with address ${newAccount?.address}`</div>,
     })
     return newAccount || null
   }
