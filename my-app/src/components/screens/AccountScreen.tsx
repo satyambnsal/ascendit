@@ -42,7 +42,7 @@ export const AccountScreen = () => {
           <div className="px-4 justify-center items-center flex flex-col gap-8 text-center w-full mt-auto">
             {!!account && (
               <div className="w-full">
-                <label className="font-semibold mb-4 block">Use Existing Wallet</label>
+                <label className="font-semibold mb-4 block">Use Existing Account</label>
                 <Button
                   onClick={() => {
                     history.push('/leaderboard')
@@ -66,7 +66,7 @@ export const AccountScreen = () => {
               size="lg"
             >
               {!!isLoading && <Spinner className="text-white" />}
-              {!isLoading && <span className="">Create New Wallet</span>}
+              {!isLoading && <span className="">Create New Account</span>}
             </Button>
           </div>
         </div>

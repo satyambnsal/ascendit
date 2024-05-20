@@ -51,7 +51,7 @@ export const Settings = () => {
               size="lg"
             >
               {!!isLoading && <Spinner className="w-6" />}
-              {!isLoading && <span className="">Create New Wallet</span>}
+              {!isLoading && <span className="">Create New Account</span>}
             </Button>
           )}
 
@@ -70,20 +70,23 @@ export const Settings = () => {
                 className="k-color-brand-green mr-2"
                 color="#A91D3A"
               />
-              Delete Wallet
+              Delete Account
             </Button>
           )}
 
           <Button size="lg" className="w-full mb-8 min-h-12 p-0">
-            <a href="https://t.me/satyambnsal" className='w-full h-full text-inherit flex items-center justify-center' target='_blank'>
-
-            <IonIcon
+            <a
+              href="https://t.me/satyambnsal"
+              className="w-full h-full text-inherit flex items-center justify-center"
+              target="_blank"
+            >
+              <IonIcon
                 icon={chatbox}
                 size="small"
                 className="k-color-brand-green mr-2"
                 color="#A91D3A"
               />
-           Support Or Feedback
+              Support Or Feedback
             </a>
           </Button>
           {account?.address && (

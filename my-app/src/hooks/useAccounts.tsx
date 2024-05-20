@@ -110,7 +110,7 @@ export const useAccounts = () => {
     }
     setIsLoading(false)
     toast({
-      title: 'Wallet Created successfully',
+      title: 'Account Created successfully',
       description: (
         <div className="">
           New burner wallet created with address
@@ -125,7 +125,7 @@ export const useAccounts = () => {
     setAccountData(null)
     removeAccountFromStorage()
     toast({
-      title: 'Wallet deleted successfully',
+      title: 'Account deleted successfully',
       description: 'We have deleted your wallet',
     })
   }
