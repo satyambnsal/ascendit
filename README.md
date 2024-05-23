@@ -27,7 +27,7 @@ Crafted with Dojo and StarkNet , this innovative app offers an immersive and cha
 - App uses phone persistent storage, that means whenever you create a wallet, it will be available until you manually delete the wallet or uninstall the app.
 
 
-## Help make us the game better by [becoming a beta tester](https://testflight.apple.com/join/0VjqcGHL)
+## Help make us the game better by <a href="https://testflight.apple.com/join/0VjqcGHL" target="_blank">becoming a beta tester!</a>
 
 
 
@@ -36,7 +36,7 @@ Crafted with Dojo and StarkNet , this innovative app offers an immersive and cha
 - Smart contracts are written in [Cairo](https://book.cairo-lang.org/title-page.html) and uses [Dojo Engine](https://www.dojoengine.org/)
 - Contracts are deployed on [Katana](https://book.dojoengine.org/toolchain/katana)
 - [Torii](https://book.dojoengine.org/toolchain/torii) as an event indexer and frontend uses torii graphql endpoint.
-- ReactJS along with [Capacitor](https://capacitorjs.com/docs/getting-started) is used to develop the mobile app. 
+- ReactJS along with <a href="https://capacitorjs.com/docs/getting-started" target="_blank">Capacitor</a> is used to develop the mobile app. 
 
 ## Getting Started
 
@@ -84,7 +84,9 @@ Also I was streaming most of the time during the development 😅 so in case you
 If you face any issue, or have a feedback, please do reach out to me on any
 
 Email: satyamsgsits1994@gmail.com
+
 Telegram: https://t.me/satyambnsal
+
 Discord: https://discordapp.com/users/satyambnsal
 
 
