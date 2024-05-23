@@ -21,9 +21,22 @@ Crafted with Dojo and StarkNet , this innovative app offers an immersive and cha
 
 - Addictive and challenging puzzle gameplay
 - Unique and randomly generated puzzles for endless replayability
+- Uses gasless transactions so you don't need to pay anything when making a transaction
 - Sleek and intuitive user interface
-- Built with Dojo and StarkNet 
 - Cross-platform compatibility (available on iOS and Android) - Currently in app store review mode
+- App uses phone persistent storage, that means whenever you create a wallet, it will be available until you manually delete the wallet or uninstall the app.
+
+
+## Help make us the game better by [becoming a beta tester](https://testflight.apple.com/join/0VjqcGHL)
+
+
+
+# Technology
+
+- Smart contracts are written in [Cairo](https://book.cairo-lang.org/title-page.html) and uses [Dojo Engine](https://www.dojoengine.org/)
+- Contracts are deployed on [Katana](https://book.dojoengine.org/toolchain/katana)
+- [Torii](https://book.dojoengine.org/toolchain/torii) as an event indexer and frontend uses torii graphql endpoint.
+- ReactJS along with [Capacitor](https://capacitorjs.com/docs/getting-started) is used to develop the mobile app. 
 
 ## Getting Started
 
@@ -65,4 +78,17 @@ yarn run open
 Now you should be able to click on `Build` button in ios to build it in a ios emulator or ios device connected to your machine.
 
 
+Also I was streaming most of the time during the development 😅 so in case you want to see me struggling and you have nothing better to do, checkout the [Build an ios app for dojo game](https://www.youtube.com/watch?v=e0h9CcbloyE&t=4132s)
 
+# Contact
+If you face any issue, or have a feedback, please do reach out to me on any
+
+Email: satyamsgsits1994@gmail.com
+Telegram: https://t.me/satyambnsal
+Discord: https://discordapp.com/users/satyambnsal
+
+
+
+# References
+
+Huge thanks to broody from Cartridge team to create a original web version for the game. I basically copied all smart contracts from his repo 😅
