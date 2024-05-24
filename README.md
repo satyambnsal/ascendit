@@ -29,6 +29,7 @@ Crafted with Dojo and StarkNet , this innovative app offers an immersive and cha
 
 ## Help make us the game better by <a href="https://testflight.apple.com/join/0VjqcGHL" target="_blank">becoming a beta tester!</a>
 
+<a href="https://youtu.be/K4WFiN6qvLs" target="_blank">Here is the walkthrough video on iphone</a>
 
 
 # Technology
